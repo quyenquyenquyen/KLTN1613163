@@ -4,10 +4,12 @@ import DateTimePicker from 'react-datetime-picker'
 import $ from 'jquery'
 import AuthService from '../Services/AuthService';
 import { AuthContext } from '../Context/AuthContext';
+import { useAlert } from "react-alert";
 
 export default function EditExercise(props) {
 
     const id = props.match.params.id
+    const alert = useAlert()
     const exerciseName = props.match.params.exerciseName
     const week = props.match.params.week
     const deadline = props.match.params.deadline
@@ -83,16 +85,16 @@ export default function EditExercise(props) {
                         alert("Post success")
 
                     } else {
-                        alert("Error when post file")
+                        alert.error("Có lỗi xảy ra, vui lòng thử lại")
                     }
                 })
         } else {
             axios.put(`/subject/updateExercise/${id}/${week}`,variables)
                 .then(response => {
                     if (response) {
-                        alert('Post Created!')
+                        alert.success('Cập nhật bài viết thành công')
                     } else {
-                        alert('Error when create subject')
+                        alert.error('Có lỗi xảy ra, vui lòng thử lại')
                     }
                 })
         }
@@ -112,7 +114,7 @@ export default function EditExercise(props) {
 
 
             <button className="btn btn-primary" onClick={IsDisplay}>
-                {(isDisplay) ? 'cancel' : 'add file'}
+                {(isDisplay) ? 'Đóng' : 'Thêm file'}
             </button>
             <div>
                 <form onSubmit={handleSubmit} >
@@ -148,13 +150,13 @@ export default function EditExercise(props) {
 
                             <br />
                             <div class="form-group">
-                                <label for="exampleInputEmail2" style={{ float: "left" }}>Exercise Name</label>
+                                <label for="exampleInputEmail2" style={{ float: "left" }}>Tên bài tập</label>
                                 <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Huynh Van Tuan"
                                     onChange={onChangeTeacher}
                                     value={teacher} />
                             </div>
 
-                            <h4 style={{ color: "red" }}>Deadline for this exercise</h4>
+                            <h4 style={{ color: "red" }}>Hạn thời gian</h4>
 
                             <div>
                                 <DateTimePicker
@@ -167,7 +169,7 @@ export default function EditExercise(props) {
 
                         </form>
                     </div>
-                    <button type="submit" value="Submit" className="btn btn-primary btn-block" >Submit</button><br/>
+                    <button type="submit" value="Submit" className="btn btn-primary btn-block" >Cập nhật</button><br/>
                 </form>
             </div>
 

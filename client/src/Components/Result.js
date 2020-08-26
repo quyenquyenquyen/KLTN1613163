@@ -21,14 +21,14 @@ export default function Result(props) {
             })
     }, [])
 
-
+    let i =0
     const renderbody = listUser.map((listUser, index) => {
  
             if (listUser.mssv===user.username) {
             return (
                 <tbody>
                     <tr>
-                        <td>{index + 1}</td>
+                        <td>{i+=1}</td>
                         <td>{listUser.subName}</td>
                         {/* <td><a><i className="fa fa-list" /></a></td> */}
                         <td>
@@ -59,7 +59,7 @@ export default function Result(props) {
 })
 
 const rendertablelistUser =
-    <div class="container table-responsive py-5">
+    <div class="container table-responsive ">
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -119,7 +119,7 @@ const renderScore =
     </div>
 
 return (
-    <div className="text-center">
+    <div className="text-center" style={{padding:"10px"}}>
         {renderScore}
         <h3 style={{ fontWeight: "bold", color: "#2a2a72" }}>DANH SÁCH MÔN HỌC ĐĂNG KÝ</h3>
         {rendertablelistUser}

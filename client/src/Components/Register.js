@@ -49,7 +49,7 @@ const Register = props => {
                 <Paper elevation={6} style={{ margin: "10px", padding: "10px" }}>
                     <div>
                         <div className="text-center">
-                            <img style={{ width: "100px", height: "auto" }} src="http://localhost:5000/up/image/12472320_1726672837602082_5692324023661199345_n.jpg" />
+                            <img style={{ width: "100px", height: "auto" }} src="http://localhost:5000/up/image/12976695_1726672837602082_5692324023661199345_o.jpg" />
                             <h5 style={{ color: "#2a2a72" }}>Bộ môn Vật lý tin học</h5>
                             <h3>Tạo người dùng mới</h3>
                         </div>
@@ -60,7 +60,7 @@ const Register = props => {
                             name="username"
                             onChange={onChange}
                             className="form-control"
-                            placeholder="Enter Username"
+                            placeholder="Nhập MSSV..."
                             required />
 
                         <label><h6 style={{ fontWeight: "bold" }}><i className="fa fa-users" />&nbsp;Họ tên:</h6> </label>
@@ -70,7 +70,7 @@ const Register = props => {
                             value={user.name}
                             onChange={onChange}
                             className="form-control"
-                            placeholder="Enter Name"
+                            placeholder="Nhập tên..."
                             required />
 
                         <label><h6 style={{ fontWeight: "bold" }}><i className="fa fa-key" />&nbsp;Mật khẩu: </h6></label>
@@ -80,7 +80,7 @@ const Register = props => {
                             value={user.password}
                             onChange={onChange}
                             className="form-control"
-                            placeholder="Enter Password"
+                            placeholder="Nhập mật khẩu"
                             required />
 
                         <label><h6 style={{ fontWeight: "bold" }}><i className="fa fa-tag" />&nbsp;Quyền truy cập:</h6> </label>
@@ -90,9 +90,9 @@ const Register = props => {
                             value={user.role}
                             onChange={onChange}
                             className="form-control"
-                            placeholder="Enter role (admin/user)"
+                            placeholder="Chọn quyền người dùng..."
                             required />
-                        <button style={{ width: "50%", margin: "0 25%" }} className="btn btn-lg btn-primary btn-block" type="submit">Create </button>
+                        <button style={{ width: "50%", margin: "0 25%" }} className="btn btn-lg btn-primary btn-block" type="submit">Tạo </button>
                     </div>
                 </Paper>
             </form>

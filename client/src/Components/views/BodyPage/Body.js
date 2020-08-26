@@ -20,22 +20,20 @@ export default class Body extends Component {
                         <div className="carousel-item active ">
                             <img className="d-block w-100" src="img/picClass.jpg" alt="First slide" />
                             <div class="carousel-caption d-none d-md-block" style={{fontWeight:"bold",background:"black",padding:"0px"}}>
-                                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
+                                <h5 style={{color:'white'}}>Hình ảnh thầy cô và sinh viên bộ môn Vật lý tin học nhân ngày 20-11.</h5>
                                 
                             </div>
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="img/myClass.jpg" alt="Second slide" />
                             <div class="carousel-caption d-none d-md-block" style={{fontWeight:"bold",background:"black",padding:"0px"}}>
-                                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                                
+                                <h5 style={{color:'white'}}>Thầy cô trao học bổng cho sinh viên trong bộ môn Vật lý tin học.</h5>
                             </div>
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="img/freeTime.jpg" alt="Third slide" />
                             <div class="carousel-caption d-none d-md-block" style={{fontWeight:"bold",background:"black",padding:"0px"}}>
-                                <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                                
+                                <h5 style={{color:'white'}}>Sinh viên bộ môn Vật lý tin học giao lưu với nhau.</h5>
                             </div>
                         </div>
                     </div>

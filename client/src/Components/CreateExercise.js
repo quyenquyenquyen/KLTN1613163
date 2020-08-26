@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import axios from 'axios'
 import DateTimePicker from 'react-datetime-picker'
 import $ from 'jquery'
+import { useAlert } from "react-alert";
 
 export default function CreateExercise(props) {
 
@@ -12,32 +13,21 @@ export default function CreateExercise(props) {
     const [week, setWeek] = useState('')
     const [isDisplay, setIsDisplay] = useState(false)
     const [file, setFile] = useState(null)
+    const alert = useAlert();
 
     //DATE TIME DEADLINE
 
-
     const [date1, setDate1] = useState(new Date())
-    const [date2, setDate2] = useState(new Date())
 
     useEffect(() => {
         $('#myFile').bind('change', function () {
-
-            //this.files[0].size gets the size of your file.
             alert(this.files[0].size);
-
         });
     }, [])
 
     const onChangeDate = date1 => {
         setDate1(date1)
-        alert(date1)
     }
-
-    const onChangeDeadlineRes = date2 => {
-        setDate2(date2)
-        alert(date2)
-    }
-
 
     const onChange = (event) => {
         setSubject(event.currentTarget.value)
@@ -46,9 +36,6 @@ export default function CreateExercise(props) {
     const onChangeTeacher = e => {
         setTeacher(e.currentTarget.value)
     }
-
-
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -61,35 +48,35 @@ export default function CreateExercise(props) {
 
         const variable = {
             week,
-            description:subject,
-            exerciseName:teacher,
-            deadline:date1
+            description: subject,
+            exerciseName: teacher,
+            deadline: date1
         }
 
         if (isDisplay) {
             if (subject === '' || teacher === '' || week === '') {
-                alert("Vui long nhap du thong tin")
+                alert.info("Vui lòng nhập đầy đủ thông tin")
             } else {
                 axios.post(`/up/upload/${id}`, formdata)
                     .then(response => {
                         if (response) {
-                            alert("Post success")
+                            alert.success("Tạo bài tập thành công")
 
                         } else {
-                            alert("Error when post file")
+                            alert.error("Có lỗi xảy ra, vui lòng thử lại")
                         }
                     })
             }
         } else {
             if (subject === '' || teacher === '' || week === '') {
-                alert("Vui long nhap du thong tin")
+                alert("Vui lòng nhập đầy đủ thông tin")
             } else {
                 axios.put(`/subject/putExercise/${id}`, variable)
                     .then(response => {
                         if (response) {
-                            alert('Post Created!')
+                            alert.success('Post Created!')
                         } else {
-                            alert('Error when create subject')
+                            alert.error('Có lỗi xảy ra, vui lòng thử lại')
                         }
                     })
             }
@@ -110,15 +97,10 @@ export default function CreateExercise(props) {
             <div class="col-sm-12 col-md-12 text-center" >
                 <h1>Tạo bài tập</h1>
             </div>
-
-
-
             <div style={{ paddingLeft: "100px", paddingRight: "100px" }}>
-
-
                 <div>
                     <button className="btn btn-primary" onClick={IsDisplay}>
-                        {isDisplay ? 'cancel' : 'add file'}
+                        {isDisplay ? 'Đóng' : 'Thêm file'}
                     </button>
                 </div>
                 <br />
@@ -126,7 +108,7 @@ export default function CreateExercise(props) {
                     <form onSubmit={handleSubmit} >
                         {isDisplay ?
                             <div className="custom-file mb-3">
-                                <input type="file" name="file" id="myFile"
+                                <input type="file" name="file" id="myFile" required
                                     onChange={(e) => {
                                         let file = e.target.files[0]
                                         setFile(file)
@@ -134,8 +116,6 @@ export default function CreateExercise(props) {
                             </div>
                             : ''}
                         <div class="container">
-
-
                             <form class="">
                                 <div class="form-group">
                                     <select class="custom-select"
@@ -168,7 +148,7 @@ export default function CreateExercise(props) {
                                 <br />
                                 <div class="form-group">
                                     <label for="exampleInputEmail2" style={{ float: "left" }}>Tên bài tập</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Huynh Van Tuan"
+                                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Huynh Van Tuan" required
                                         value={teacher}
                                         onChange={onChangeTeacher} />
                                 </div>

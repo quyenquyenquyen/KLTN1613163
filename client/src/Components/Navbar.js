@@ -91,7 +91,7 @@ function Navbar(props) {
 								<div class="col-12">
 									<nav class="navbar navbar-expand-md navbar-light ">
 
-										<a class="navbar-brand" target="_blank"><img src="https://photos.google.com/share/AF1QipMYtxsqdaw2HANF_EcBPDe6W6qrwDirHCgILxrth239BSmdple0oAc2rRKZSQYcGA/photo/AF1QipOcQfB83a3MfNUj15G5razc0xU6y_PaMkTb3_o?key=U2V1Q3hPMG80S1ZrTk05SzNweENBcEs0Nm84anhB" alt="" /></a>
+										<a class="navbar-brand" target="_blank"><img src="http://localhost:5000/up/image/12976695_1726672837602082_5692324023661199345_o.jpg" alt="" /></a>
 										<div className=" navbar-brand text-center" style={{ height: "45px", paddingBottom: "5px", margin: "0px" }}>
 											<h6 style={{ color: '#2a2a72', fontSize: "0.8rem", fontWeight: "600", fontFamily: "Times New Roman", marginBottom: "0px" }} >KHOA VẬT LÝ - VẬT LÝ KỸ THUẬT</h6>
 											<h6 style={{ color: '#2a2a72', fontWeight: "1000", fontSize: "1.0rem", fontFamily: "Times New Roman", marginBottom: "0px" }} >BỘ MÔN VẬT LÝ TIN HỌC</h6>
@@ -123,22 +123,16 @@ function Navbar(props) {
 												</li>
 												<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 													<Link className="nav-link" to='/daotao'  >ĐÀO TẠO</Link>
-
 												</li>
 												<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 													<a class="nav-link" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HOẠT ĐỘNG &nbsp;<i className="fa fa-caret-down" /></a>
 													<div class="dropdown-menu">
 														<Link class="dropdown-item" to='/dgyk'>Đóng góp ý kiến</Link>
-														<Link class="dropdown-item" to='/gioithieunhansu'>Về nhân sự</Link>
-														<Link className="dropdown-item" to='/login' >Uploadfile</Link>
+														{/* <Link className="dropdown-item" to='/login' >Đăng nhập</Link> */}
 													</div>
 												</li>
 												<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-													<a class="nav-link" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TUYỂN SINH &nbsp;<i className="fa fa-caret-down" /></a>
-													<div class="dropdown-menu">
-														<Link class="dropdown-item" to='/gioithieubomon'>Về bộ môn</Link>
-														<Link class="dropdown-item" to='/gioithieunhansu'>Về nhân sự</Link>
-													</div>
+													<Link className="nav-link" to='/login'  >ĐĂNG NHẬP</Link>
 												</li>
 											
 													<form style={{ borderBottom: "15px", marginLeft: "10px" }} role="search" class="search-form">
@@ -176,7 +170,7 @@ function Navbar(props) {
 								<div class="col-12">
 									<nav class="navbar navbar-expand-md navbar-light ">
 
-										<a class="navbar-brand" target="_blank"><img src="http://localhost:5000/up/image/12472320_1726672837602082_5692324023661199345_n.jpg" alt="" /></a>
+										<a class="navbar-brand" target="_blank"><img src="http://localhost:5000/up/image/12976695_1726672837602082_5692324023661199345_o.jpg" alt="" /></a>
 										<div className=" navbar-brand text-center" style={{ height: "45px", paddingBottom: "5px", margin: "0px" }}>
 											<h6 style={{ color: '#2a2a72', fontSize: "0.8rem", fontWeight: "600", fontFamily: "Times New Roman", marginBottom: "0px" }} >KHOA VẬT LÝ - VẬT LÝ KỸ THUẬT</h6>
 											<h6 style={{ color: '#2a2a72', fontWeight: "1000", fontSize: "1.0rem", fontFamily: "Times New Roman", marginBottom: "0px" }} >BỘ MÔN VẬT LÝ TIN HỌC</h6>

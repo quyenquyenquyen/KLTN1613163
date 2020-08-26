@@ -79,6 +79,7 @@ app.post('/upload/:subjectName/:week', upload.single('file'), passport.authentic
     const subjectName = req.params.subjectName
     const week = req.params.week
     const filename = req.params.filename
+    const username = req.user.name
     // req.user.save();
     // res.send([{ filename: req.file.filename, fileId: req.file.id, subjectName: req.params.subjectName }])
 
@@ -91,7 +92,7 @@ app.post('/upload/:subjectName/:week', upload.single('file'), passport.authentic
     //     })
     //     .catch(err => res.status(400).json({ err: err.message }))
 
-    Subject.updateOne({ subjectName: req.params.subjectName }, { $pull: { subjectArr: { filename, week } } }, { new: true }, (err, docs) => {
+    Subject.updateOne({ subjectName: req.params.subjectName }, { $pull: { subjectArr: { filename, week, username } } }, { new: true }, (err, docs) => {
         if (!err) {
             Subject.updateOne({ subjectName: req.params.subjectName }, {
                 $push: { subjectArr: todo }

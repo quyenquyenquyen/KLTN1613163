@@ -89,6 +89,7 @@ function App(props) {
                   <Route exact path="/daotao" component={DaoTao} />
                   <Route exact path="/dgyk" component={Dgyk} />
                   <Route exact path="/blogpage" component={BlogPage} />
+                  <Route exact path="/register" component={Register} />
                   <Route exact path="/" component={Body} />
                   <Route path="/formvalidation" component={FormValidation} />
                 </Switch>

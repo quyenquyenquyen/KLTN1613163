@@ -31,17 +31,13 @@ export default function ListSubject(props) {
     let sum = a => a.reduce((x, y) => x + y)
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
     useEffect(() => {
-
-
         axios.get('/subject')
             .then(response => {
                 setList(response.data)
             })
-
         axios.get('/listUser')
             .then(res => {
                 setListUser(res.data.filter(x => x.mssv === user.username))
-                console.log('listuser', res.data.filter(x => x.mssv === user.username))
             })
     }, [])
 
@@ -91,7 +87,7 @@ export default function ListSubject(props) {
         axios.post(`/subject/create`, variables)
             .then(response => {
                 if (response) {
-                    alert.success('Post Created!')
+                    alert.success('Tạo bài tập thành công')
                     setSubject('')
                     setTeacher('')
                     setPercent1(0)
@@ -104,7 +100,7 @@ export default function ListSubject(props) {
                         window.location.reload(true)
                     }, 1000);
                 } else {
-                    alert.error('Error when create subject')
+                    alert.error('Có lỗi xảy ra, vui lòng thử lại')
                 }
             })
 
@@ -125,7 +121,7 @@ export default function ListSubject(props) {
         axios.put(`/subject/editsubject/${idWhenUpdate}`, variables)
             .then(response => {
                 if (response) {
-                    alert.success('Update successfully!')
+                    alert.success('Cập nhật bài viết thành công')
                     setSubject('')
                     setTeacher('')
                     setPercent1(0)
@@ -138,34 +134,17 @@ export default function ListSubject(props) {
                         window.location.reload(true)
                     }, 1000);
                 } else {
-                    alert.error('Error when edit subject')
+                    alert.error('Có lỗi xảy ra, vui lòng thử lại')
                 }
             })
 
     }
 
-
-    const renderer = ({ days, hours, minutes, seconds, completed }) => {
-        if (completed) {
-            return <div>Timeup! Can't register this!</div>;
-        } else {
-            return (
-                <div>
-                    <h6>{days} ngày {hours} giờ {minutes} phút {seconds} giây</h6>
-                    <br />
-                </div>
-            )
-
-
-        }
-    }
-
-
     const renderbody = list.map((list, index) => {
         return (
             <tbody key={index}>
                 <tr>
-                    <th scope="row">{index + 1}</th>
+                    <th scope="row">{i+1}</th>
                     <th scope="row">{list.MMH}</th>
                     <td><Link to={`/listExercise/${list._id}`}>{list.subjectName}</Link><br />{list.Teacher}</td>
 
@@ -180,13 +159,13 @@ export default function ListSubject(props) {
                                 onClick={() => {
                                     axios.delete(`/subject/${list.subjectName}`)
                                         .then(response => {
-                                            alert.success('Delete subject success!')
+                                            alert.success('Xóa bài viết thành công')
                                             setTimeout(() => {
                                                 window.location.reload(true)
                                             }, 1000);
                                         })
                                 }}
-                            ><i className="fa fa-trash" />delete</button>
+                            ><i className="fa fa-trash" />Xóa</button>
                             <button
                                 style={{ margin: "0 2px" }}
                                 className="btn btn-outline-secondary btn-sm"
@@ -213,18 +192,17 @@ export default function ListSubject(props) {
                         {(user.role === "user") ?
                             <button type="button" className='btn btn-primary'
                                 onClick={() => {
-
                                     axios.get(`/subject/getone/${list._id}`)
                                         .then(res => {
                                             if (res.data.length === 0) {
                                                 axios.put(`/subject/putuser/${list._id}/${list.subjectName}`)
                                                     .then(res => {
                                                         if (res) {
-                                                            alert.success('put success')
+                                                            // alert.success('Cập nhật bài viết thành công')
                                                         }
                                                     })
                                             } else {
-                                                alert.error("You're registered")
+                                                alert.error("Bạn đã đăng ký môn học này rồi")
                                             }
                                         })
 
@@ -232,7 +210,7 @@ export default function ListSubject(props) {
                                 }
                                 }
                             >
-                                register
+                                Đăng kí
                             </button>
                             : <div>
                                 <button className="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal1"
@@ -285,7 +263,7 @@ export default function ListSubject(props) {
                                 onClick={() => {
                                     axios.delete(`/subject/${list.subjectName}`)
                                         .then(response => {
-                                            alert.success('Delete subject success!')
+                                            alert.success('Xóa môn học thành công')
                                             setTimeout(() => {
                                                 window.location.reload(true)
                                             }, 1000);
@@ -326,7 +304,7 @@ export default function ListSubject(props) {
                                             axios.put(`/subject/putuser/${list._id}/${list.subjectName}`)
                                                 .then(res => {
                                                     if (res) {
-                                                        alert.success('register success')
+                                                        alert.success('Đăng ký thành công')
                                                         window.location.reload(false)
                                                     }
                                                 })
@@ -365,7 +343,7 @@ export default function ListSubject(props) {
         )
 
     })
-
+    let i =0;
 
     const renderlistuser =
         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -378,16 +356,6 @@ export default function ListSubject(props) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div >
-                            <ReactHTMLTableToExcel
-                                id="btnexport"
-                                className="btn btn-primary"
-                                table="tableResult"
-                                filename="tablexls"
-                                sheet="tablexls"
-                                buttonText="Download as XLS"
-                            />
-                        </div>
                         <div class="container table-responsive py-5">
                             <table class="table table-bordered table-hover" id="tableResult">
                                 <thead class="thead-dark">
@@ -400,21 +368,32 @@ export default function ListSubject(props) {
                                     </tr>
                                 </thead>
                                 {listStudent.map((listStudent, index) => {
+                              
                                     if (listStudent.subId === subjectId) {
                                         return (
                                             <tbody>
-                                               <tr>
-                                               <td>{index}</td>
-                                                <td>{listStudent.mssv}</td>
-                                                <td>{listStudent.username}</td>
-                                                <td style={{ color: "red" }}>{subArr.filter(x => x.user === listStudent.mssv).length === 0 ? 'null' : (sum(subArr.filter(x => x.user === listStudent.mssv).map(x => Number(x.point))) / total).toFixed(2)}</td>
-                                               </tr>
+                                                <tr>
+                                                    <td>{i+=1}</td>
+                                                    <td>{listStudent.mssv}</td>
+                                                    <td>{listStudent.username}</td>
+                                                    <td style={{ color: "red" }}>{subArr.filter(x => x.user === listStudent.mssv).length === 0 ? '0.00' : (sum(subArr.filter(x => x.user === listStudent.mssv).map(x => Number(x.point))) / total).toFixed(2)}</td>
+                                                </tr>
 
                                             </tbody>
                                         )
                                     }
                                 })}
                             </table>
+                        </div>
+                        <div >
+                            <ReactHTMLTableToExcel
+                                id="btnexport"
+                                className="btn btn-primary"
+                                table="tableResult"
+                                filename="tablexls"
+                                sheet="tablexls"
+                                buttonText="Tải danh sách lớp học"
+                            />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -510,7 +489,7 @@ export default function ListSubject(props) {
                         <th>Mô tả</th>
                         <th scope="col">Lớp</th>
                         {user.role === "admin" ? <th>Thao tác</th> : ''}
-                        {user.role === "admin" ? <th scope="col">Danh sách sinh viên</th> : <th>?</th>}
+                        {user.role === "admin" ? <th scope="col">Danh sách sinh viên</th> : <th>Tình trạng đăng kí</th>}
                     </tr>
                 </thead>
                 {renderlistsubject}
@@ -527,7 +506,7 @@ export default function ListSubject(props) {
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>CREATE NEW SUBJECT</h4>
+                                <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>TẠO MÔN HỌC MỚI</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -539,31 +518,31 @@ export default function ListSubject(props) {
                                     onChange={onChangeMMH}
                                     required />
 
-                                <label for="exampleInputName2" style={{ float: "left" }}>Subject Name</label>
+                                <label for="exampleInputName2" style={{ float: "left" }}>Tên môn học</label>
                                 <input type="text" class="form-control" id="exampleInputName2" placeholder="ReactJS"
                                     value={subject}
                                     onChange={onChange}
                                     required />
 
-                                <label for="exampleInputEmail2" style={{ float: "left" }}>Teacher Name</label>
+                                <label for="exampleInputEmail2" style={{ float: "left" }}>Tên giảng viên</label>
                                 <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Huynh Van Tuan"
                                     value={teacher}
                                     onChange={onChangeTeacher}
                                     required />
 
-                                <label for="exampleInputEmail2" style={{ float: "left" }}>So tin chi</label>
+                                <label for="exampleInputEmail2" style={{ float: "left" }}>Số tín chỉ</label>
                                 <input type="text" class="form-control" id="exampleInputEmail2" placeholder="3"
                                     value={tinchi}
                                     onChange={onChangeTinchi}
                                     required />
 
-                                <label for="exampleInputEmail2" style={{ float: "left" }}>Lop</label>
+                                <label for="exampleInputEmail2" style={{ float: "left" }}>Lớp</label>
                                 <input type="text" class="form-control" id="exampleInputEmail2" placeholder="16VLTH"
                                     value={lop}
                                     onChange={onChangeClass}
                                     required />
 
-                                <div style={{ textAlign: "left" }}><label for="exampleInputEmail2" >Phan tram diem:</label></div>
+                                <div style={{ textAlign: "left" }}><label for="exampleInputEmail2" >Phần trăm điểm:</label></div>
                                 <div>
                                     <div className="row">
                                         <div className="col">
@@ -587,7 +566,7 @@ export default function ListSubject(props) {
                             </div>
                             <div class="modal-footer">
                                 {/* <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> */}
-                                <button type="submit" class="btn btn-primary" style={{ background: "#2a2a72" }} >Create</button>
+                                <button type="submit" class="btn btn-primary" style={{ background: "#2a2a72" }} >Tạo</button>
                             </div>
                         </div>
                     </div>
@@ -599,7 +578,7 @@ export default function ListSubject(props) {
         <div className="text-center" style={{ padding: "0 10%" }}>
             <h3 style={{ color: "#2a2a72" }}>Danh sách môn học</h3>
 
-            <a style={{ fontSize: "1em", margin: "0 5px", color: "red", fontStyle: "italic" }}>*Vui long dang ki de xem duoc bai tap</a>
+            {user.role==="user"?<a style={{ fontSize: "1em", margin: "0 5px", color: "red", fontStyle: "italic" }}>*Vui lòng đăng kí để xem được nội dung bài tập</a>:''}
             <hr />
             {user.role === "admin" ? renderButtonCreateNewSub : ''}
             {renderList}

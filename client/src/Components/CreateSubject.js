@@ -6,7 +6,6 @@ import { useAlert } from "react-alert";
 
 export default function CreateSubject(props) {
 
-
     const [subject, setSubject] = useState('')
     const [teacher, setTeacher] = useState('')
     const [tinchi, setTinchi] = useState('')
@@ -44,7 +43,7 @@ export default function CreateSubject(props) {
         axios.post(`/subject/create`, variables)
             .then(response => {
                 if (response) {
-                    alert.success('Post Created!')
+                    alert.success('Tạo môn học thành công')
                     setSubject('')
                     setTeacher('')
                     setPercent(0)
@@ -53,7 +52,7 @@ export default function CreateSubject(props) {
                         props.history.push('/listSubject')
                     }, 1000);
                 } else {
-                    alert.error('Error when create subject')
+                    alert.error('Có lỗi xảy ra,vui lòng thử lại')
                 }
             })
 

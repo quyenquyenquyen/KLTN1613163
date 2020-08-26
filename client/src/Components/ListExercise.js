@@ -76,17 +76,17 @@ export default function ListExercise(props) {
         if (length !== 0) {
 
             if (week === '') {
-                alert.error("Invalid week")
+                alert.error("Vui lòng chọn tuần học")
             } else {
                 axios.post(`/up/upload/${id}`, formdata)
                     .then(response => {
                         if (response) {
-                            alert.success("Post successs")
+                            alert.success("Tạo bài tập thành công")
                             setTimeout(() => {
                                 window.location.reload(true)
                             }, 1000);
                         } else {
-                            alert.error("Error when post file")
+                            alert.error("Có lỗi xảy ra, vui lòng thử lại")
                         }
                     })
             }
@@ -94,17 +94,17 @@ export default function ListExercise(props) {
         } else {
 
             if (week === '') {
-                alert.error("Invalid week")
+                alert.error("Vui lòng chọn tuần học")
             } else {
                 axios.put(`/subject/putExercise/${id}`, variable)
                     .then(response => {
                         if (response) {
-                            alert.success('Post Created!')
+                            alert.success('Tạo bài tập thành công')
                             setTimeout(() => {
                                 window.location.reload(true)
                             }, 1000);
                         } else {
-                            alert.error('Error when create subject')
+                            alert.error('Có lỗi xảy ra, vui lòng thử lại')
                         }
                     })
             }
@@ -135,27 +135,27 @@ export default function ListExercise(props) {
             axios.put(`/up/upload/edit/${id}/${week}`, formdata)
                 .then(response => {
                     if (response) {
-                        alert.success("Post success")
+                        alert.success("Tạo bài tập thành công")
                         setTimeout(() => {
                             window.location.reload(true)
                         }, 1000);
                     } else {
-                        alert.error("Error when post file")
+                        alert.error("Có lỗi xảy ra, vui lòng thử lại")
                     }
                 })
         } else {
             if (exerciseName === '' || week === '') {
-                alert.error("vui long nhap du thong tin")
+                alert.error("Vui lòng nhập đủ thông tin")
             } else {
                 axios.put(`/subject/updateExercise/${id}/${week}`, variables)
                     .then(response => {
                         if (response) {
-                            alert.success('Post Created!')
+                            alert.success('Tạo bài tập thành công')
                             setTimeout(() => {
                                 window.location.reload(true)
                             }, 1000);
                         } else {
-                            alert.error('Error when create subject')
+                            alert.error('Có lỗi xảy ra, vui lòng thử lại')
                         }
                     })
             }
@@ -164,11 +164,11 @@ export default function ListExercise(props) {
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
-            return <div>Time up! </div>;
+            return <div>Hết thời gian</div>;
         } else {
             return (
                 <div style={{ color: "red" }}>
-                    <h6>{days} Day {hours} Hour {minutes} minute {seconds} Second</h6>
+                    <h6>{days} Ngày {hours} Giờ {minutes} Phút {seconds} Giây</h6>
                 </div>
             )
         }
@@ -179,7 +179,7 @@ export default function ListExercise(props) {
             <tbody key={index}>
                 <tr>
                     <th scope="row">{index + 1}</th>
-                    <td><Link to={`/exercise/${id}/${sub.week}/${sub.exerciseName}/${sub.deadline}/${sub.name}`}>Bai tap {sub.week}</Link></td>
+                    <td><Link to={`/exercise/${id}/${sub.week}/${sub.exerciseName}/${sub.deadline}/${sub.name}`}>Bài tập{sub.week}</Link></td>
                     <td>{sub.exerciseName}</td>
                     {user.role==="admin"?<td><Link to={`/listfile/${sub.week}/${id}`}><i className="fa fa-list" /></Link></td>:''}
                     {user.role === "admin" ?
@@ -196,7 +196,7 @@ export default function ListExercise(props) {
                                             alert.error('no')
                                         }
                                     })
-                            }}><i className="fa fa-trash" />delete</button>
+                            }}><i className="fa fa-trash" />Xóa</button>
 
                             <button onClick={() => {
                                 setWeek(sub.week)
@@ -204,7 +204,7 @@ export default function ListExercise(props) {
                                 setExerciseName(sub.exerciseName)
                             }
                             }
-                                style={{ margin: "0 2px" }} className="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal1"><i className="fa fa-pencil" />edit
+                                style={{ margin: "0 2px" }} className="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exampleModal1"><i className="fa fa-pencil" />Sửa
                                 {/* <Link to={`/edit/exercise/${id}/${sub.week}/${sub.exerciseName}/${sub.deadline}/${sub.name}/${sub.description}`}><i className="fa fa-pencil" />edit</Link> */}
                             </button>
 
@@ -212,7 +212,7 @@ export default function ListExercise(props) {
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>EDIT EXERCISE </h4>
+                                            <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>CHỈNH SỬA BÀI TẬP</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -248,7 +248,7 @@ export default function ListExercise(props) {
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="exampleInputName2" style={{ float: "left" }}>description</label>
+                                                                <label for="exampleInputName2" style={{ float: "left" }}>Mô tả</label>
                                                                 <input type="text" class="form-control" id="exampleInputName2" placeholder="Nop bai tap bang file word"
                                                                     value={description}
                                                                     onChange={onChangeDescription} />
@@ -256,7 +256,7 @@ export default function ListExercise(props) {
 
                                                             <br />
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail2" style={{ float: "left" }}>Exercise Name</label>
+                                                                <label for="exampleInputEmail2" style={{ float: "left" }}>Tên bài tập</label>
                                                                 <input type="text" class="form-control" id="exampleInputEmail2" placeholder="ReactJS" required
                                                                     value={exerciseName}
                                                                     onChange={onChangeExerciseName} />
@@ -265,7 +265,7 @@ export default function ListExercise(props) {
 
 
 
-                                                            <h4 style={{ color: "red" }}>Deadline for this exercise</h4>
+                                                            <h4 style={{ color: "red" }}>Hạn thời gian cho bài tập này</h4>
                                                             <div>
                                                                 <DateTimePicker
                                                                     onChange={onChangeDate}
@@ -284,7 +284,7 @@ export default function ListExercise(props) {
                                         </div>
                                         <div class="modal-footer">
                                             {/* <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> */}
-                                            <button type="button" class="btn btn-primary" style={{ background: "#2a2a72" }} data-dismiss="modal" onClick={onUpdate}>Update</button>
+                                            <button type="button" class="btn btn-primary" style={{ background: "#2a2a72" }} data-dismiss="modal" onClick={onUpdate}>Cập nhật</button>
                                         </div>
                                     </div>
                                 </div>
@@ -308,11 +308,11 @@ export default function ListExercise(props) {
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Week</th>
-                        <th scope="col">Exercise</th>
-                        <th scope="col">Exercise name</th>
-                        <th scope="col">List exercise</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Tuần</th>
+                        <th scope="col">Bài tập tuần</th>
+                        <th scope="col">Tên bài tập</th>
+                        <th scope="col">Danh sách bài tập</th>
+                        <th scope="col">Thao tác</th>
 
                     </tr>
                 </thead>
@@ -327,10 +327,10 @@ export default function ListExercise(props) {
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">Week</th>
-                                <th scope="col">Exercise</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Deadline</th>
+                                <th scope="col">Tuần</th>
+                                <th scope="col">Bài tập</th>
+                                <th scope="col">Mô tả</th>
+                                <th scope="col">Hạn thời gian</th>
 
                             </tr>
                         </thead>
@@ -349,13 +349,13 @@ export default function ListExercise(props) {
                     setWeek('')
                     setDescription('')
                     setExerciseName('')
-                }}><i className="fa fa-plus" />&nbsp;Create new exercise</button>
+                }}><i className="fa fa-plus" />&nbsp;Tạo bài tập mới</button>
 
                 <form onSubmit={handleSubmit} class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>CREATE NEW EXERCISE</h4>
+                                <h4 class="modal-title" id="exampleModalLabel" style={{ color: "#2a2a72" }}>TẠO BÀI TẬP MỚI</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -385,7 +385,7 @@ export default function ListExercise(props) {
                                                     <select type="text" class="custom-select" required
                                                         value={week}
                                                         onChange={handleChange}>
-                                                        <option selected>Choose...</option>
+                                                        <option selected>Chọn tuần...</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -400,10 +400,11 @@ export default function ListExercise(props) {
                                                         <option value="12">12</option>
                                                         <option value="13">13</option>
                                                         <option value="14">14</option>
+                                                        <option value="14">15</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputName2" style={{ float: "left" }}>description</label>
+                                                    <label for="exampleInputName2" style={{ float: "left" }}>Mô tả</label>
                                                     <input type="text" class="form-control" placeholder="Nop bai tap bang file word"
                                                         value={description}
                                                         onChange={onChangeDescription} />
@@ -411,13 +412,13 @@ export default function ListExercise(props) {
 
                                                 <br />
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail2" style={{ float: "left" }}>Exercise Name</label>
+                                                    <label for="exampleInputEmail2" style={{ float: "left" }}>Tên bài tập</label>
                                                     <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Bai tap a"
                                                         value={exerciseName}
                                                         onChange={onChangeExerciseName}
                                                         required />
                                                 </div>
-                                                <h4 style={{ color: "red" }}>Deadline for this exercise</h4>
+                                                <h4 style={{ color: "red" }}>Hạn thời gian cho bài tập</h4>
                                                 <div>
                                                     <DateTimePicker
                                                         onChange={onChangeDate}
@@ -436,7 +437,7 @@ export default function ListExercise(props) {
                             </div>
                             <div class="modal-footer">
                                 {/* <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> */}
-                                <button type="submit" class="btn btn-primary" style={{ background: "#2a2a72" }}>Create</button>
+                                <button type="submit" class="btn btn-primary" style={{ background: "#2a2a72" }}>Tạo</button>
                             </div>
                         </div>
                     </div>
@@ -444,15 +445,15 @@ export default function ListExercise(props) {
             </div>
         </div>
     return (
-        <div style={{ padding: "0 10%", textAlign: "center" }}>
-            <h3 style={{ color: "red", fontWeight: "bold", color: "#2a2a72" }}>List Exercise</h3>
+        <div style={{ padding: "10px 10%", textAlign: "center" }}>
+            <h3 style={{ color: "red", fontWeight: "bold", color: "#2a2a72" }}>Danh sách bài tập</h3>
 
             <hr />
 
             {user.role === "admin" ? renderButtonCreateNewEx : ''}
 
             {subject.length === 0
-                ? 'No exercise'
+                ? <h5 style={{color:'#2a2a72',fontWeight:"bold"}}>Hiện chưa có bài tập, Vui lòng quay lại sau!</h5>
                 : <div>{rendertable}</div>}
 
             {user.role === 'admin' ? <div>{rendertableTeacher}</div> : ''}

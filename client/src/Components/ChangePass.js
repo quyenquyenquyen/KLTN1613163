@@ -11,12 +11,6 @@ export default function ChangePass(props) {
     const [confirmPass, setConfirmPass] = useState('')
     const alert = useAlert();
 
-    // const isMatch = await bcrypt.compare(currentPass,user.password)
-
-
-
-
-
     useEffect(() => {
         axios.get('/user/authenticated')
             .then(response => {
@@ -45,58 +39,56 @@ export default function ChangePass(props) {
         }
 
 
-       if(pass.length<6){
-           alert("password too short")
-       }else{
-        if (pass === confirmPass) {
-            axios.put(`/user/reset/`, variables)
-                .then(response => {
-                    if (response) {
-                        alert.success('Update success')
-                        setPass('')
-                        setConfirmPass('')
-                        setTimeout(() => {
-                            props.history.push('/listSubject')
-                        }, 2000);
-                    }
-                })
+        if (pass.length < 6) {
+            alert.error("Mật khẩu quá ngắn, độ dài mật khẩu tối đa 6 kí tự")
         } else {
-            alert.error('Password not matching')
+            if (pass === confirmPass) {
+                axios.put(`/user/reset/`, variables)
+                    .then(response => {
+                        if (response) {
+                            alert.success('Cập nhật mật khẩu thành công')
+                            setPass('')
+                            setConfirmPass('')
+                            setTimeout(() => {
+                                props.history.push('/listSubject')
+                            }, 2000);
+                        }
+                    })
+            } else {
+                alert.error('Mật khẩu không khớp')
+            }
         }
-       }
-
-
     }
 
 
     return (
-        <div  style={{padding:"3% 5%" }}>
-            <form onSubmit={onSubmit} style={{ padding: "1% 5%",width:"50%",margin:"0 auto" }}>
+        <div style={{ padding: "3% 5%" }}>
+            <form onSubmit={onSubmit} style={{ padding: "1% 5%", width: "50%", margin: "0 auto" }}>
                 <Paper elevation={6} style={{ margin: "10px", padding: "10px" }}>
                     <div>
                         <div className="text-center">
-                            <img style={{ width: "100px", height: "auto" }} src="http://localhost:5000/up/image/12472320_1726672837602082_5692324023661199345_n.jpg" />
-                            <h5 style={{color:"#2a2a72"}}>Bộ môn Vật lý tin học</h5>
-                            <h3>Change password</h3>
+                            <img style={{ width: "100px", height: "auto" }} src="http://localhost:5000/up/image/12976695_1726672837602082_5692324023661199345_o.jpg" />
+                            <h5 style={{ color: "#2a2a72" }}>Bộ môn Vật lý tin học</h5>
+                            <h3>Thay đổi mật khẩu</h3>
                         </div>
 
-                        <label ><h6 style={{fontWeight:"bold"}}><i className="fa fa-user"/>&nbsp;Mật khẩu mới:</h6> </label>
+                        <label ><h6 style={{ fontWeight: "bold" }}><i className="fa fa-user" />&nbsp;Mật khẩu mới:</h6> </label>
                         <input type="password"
-                        style={{marginBottom:"1em"}}
+                            style={{ marginBottom: "1em" }}
                             name="username"
                             onChange={onPassChange}
                             className="form-control"
-                            placeholder="Enter Username"
+                            placeholder="Nhập mật khẩu mới"
                             required />
-                        <label ><h6 style={{fontWeight:"bold"}}><i className="fa fa-key"/>&nbsp;Xác thực mật khẩu mới:</h6> </label>
+                        <label ><h6 style={{ fontWeight: "bold" }}><i className="fa fa-key" />&nbsp;Xác thực mật khẩu mới:</h6> </label>
                         <input type="password"
                             style={{ marginBottom: "1em" }}
                             name="password"
                             onChange={onConfirmPassChange}
                             className="form-control"
-                            placeholder="Enter Password"
+                            placeholder="Xác nhận mật khẩu"
                             required />
-                        <button style={{width:"50%",margin:"0 25%"}} className="btn btn-lg btn-primary btn-block" type="submit">Change </button>
+                        <button style={{ width: "50%", margin: "0 25%" }} className="btn btn-lg btn-primary btn-block" type="submit">Change </button>
 
                     </div>
                 </Paper>

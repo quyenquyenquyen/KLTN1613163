@@ -68,18 +68,18 @@ export default function ListFileOfExercise(props) {
   })
   const renderFileOfStudentForTeacher =
     <div style={{ textAlign: "center" }}>
-      <h4 style={{ color: "#2a2a72", fontWeight: "bold", padding: "15px", margin: "0" }}>List Exercise of student - Week {week}</h4>
+      <h4 style={{ color: "#2a2a72", fontWeight: "bold", padding: "15px", margin: "0" }}>Danh sách bài tập tuần {week}</h4>
       <div class="bs-example container" data-example-id="striped-table">
         <table class="table table-striped table-bordered table-hover">
-          <caption>Bootstrap Table CSS Demo</caption>
+          {/* <caption>Bootstrap Table CSS Demo</caption> */}
           <thead>
             <tr>
               <th>MSSV</th>
-              <th>Name</th>
-              <th>File Name</th>
-              <th>Time</th>
-              <th>point</th>
-              <th>Set point</th>
+              <th>Họ tên</th>
+              <th>Tên file</th>
+              <th>Thời gian nộp</th>
+              <th>Điểm</th>
+              <th>Chấm điểm</th>
             </tr>
           </thead>
           {bodyOfTable}
